@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    border-color: #30363d;
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0d1117;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #21262d;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #30363d;
+}
+
+/* Code highlighting styles */
+.c-keyword { color: #ff7b72; font-weight: 600; }
+.c-type { color: #79c0ff; font-weight: 500; }
+.c-string { color: #a5d6ff; }
+.c-number { color: #79c0ff; }
+.c-comment { color: #8b949e; font-style: italic; }
+.c-preprocessor { color: #d2a8ff; font-weight: 600; }
+.c-function { color: #d2a8ff; font-weight: 500; }
+.c-operator { color: #ff7b72; }
+.c-variable { color: #e6edf3; }
+
+/* Pulse animation for node highlighting */
+@keyframes highlight-pulse {
+  0%, 100% {
+    background-color: rgba(56, 189, 248, 0.22);
+    border-left-color: #38bdf8;
+  }
+  50% {
+    background-color: rgba(56, 189, 248, 0.45);
+    border-left-color: #60a5fa;
+  }
+}
+
+.line-highlighted {
+  animation: highlight-pulse 2s infinite ease-in-out;
+  border-left: 3px solid #38bdf8;
+}
+
+.line-danger {
+  background-color: rgba(248, 81, 73, 0.15);
+  border-left: 3px solid #f85149;
+}
+
+.line-warning {
+  background-color: rgba(210, 153, 34, 0.15);
+  border-left: 3px solid #d29922;
+}
+
+.line-info {
+  background-color: rgba(88, 166, 255, 0.15);
+  border-left: 3px solid #58a6ff;
+}
