@@ -1,98 +1,195 @@
-# C-Insight: The Visual Static Analyzer
+<div align="center">
 
-**C-Insight** is a modern, full-stack developer tool designed for visual C static analysis, interactive Abstract Syntax Tree (AST) exploration, and real-time code health & memory safety diagnostics.
+<img src="https://img.shields.io/badge/C--Insight-Visual%20Static%20Analyzer-0ea5e9?style=for-the-badge&logo=c&logoColor=white" alt="C-Insight"/>
 
----
+# 🔬 C-Insight — The Visual Static Analyzer
 
-## 🌟 Key Features
+**Parse · Analyze · Visualize · Fix — all in the browser.**
 
-### 1. Two-Panel Responsive Studio
-- **Left Panel (Interactive C Editor)**:
-  - Real-time C syntax editor with customizable indentation and line numbers.
-  - Gutter warning and danger badges marking memory risks directly on source lines.
-  - Synchronized bidirectional highlighting: clicking or hovering an AST node or diagnostic issue scrolls and pulses the exact C code line(s).
-  - Comes pre-loaded with a default C function featuring dynamic memory allocation, a `for loop`, and an `if condition`.
-  - Additional presets: Memory Leak & Vulnerability Demo, Array Bounds & Off-by-One Risk, Safe Matrix (100% A+ score), and Uninitialized Pointer Dereference.
-  - Code auto-formatter and one-click quick fix applicator.
+[![CI](https://github.com/tejusgupta00-bit/c-insight/actions/workflows/ci.yml/badge.svg)](https://github.com/tejusgupta00-bit/c-insight/actions/workflows/ci.yml)
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Visit%20Now-22c55e?style=flat&logo=vercel&logoColor=white)](https://c-insight.vercel.app)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.x-3178c6?style=flat&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![React](https://img.shields.io/badge/React-18-61dafb?style=flat&logo=react&logoColor=black)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite-5.x-646cff?style=flat&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind-3.x-38bdf8?style=flat&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-f59e0b?style=flat)](LICENSE)
 
-- **Right Panel (Visual AST Tree Map & Code Health Dashboard)**:
-  - **Visual AST Tree Map**:
-    - Interactive hierarchical graph with Bézier connecting splines and color-coded node categories (`function`, `loop`, `condition`, `memory`, `declaration`, `expression`).
-    - Smooth pan and zoom controls (Zoom In, Zoom Out, Mouse Wheel Zoom, Canvas Pan, Reset, Fit).
-    - Expand & collapse branches with child counters.
-    - Real-time search filter (e.g. `for`, `malloc`, `if`, `count`).
-    - Depth control slider (Depth 2 to 8 / Deep).
-    - Dual display modes: Visual Graph Map vs Hierarchical Tree Explorer.
-    - Selected Node Inspector showing node type, line range, and parsed metadata.
-  - **Code Health Dashboard**:
-    - Live health score gauge (0-100) with dynamic letter grade (A+, A, B, C, D, F).
-    - Memory Safety Score, Cyclomatic Complexity $V(G)$, Max Nesting Depth, Cognitive Complexity, and SEI Maintainability Index.
-    - Comprehensive diagnostics covering:
-      - Memory Leaks (`CWE-401` missing `free`)
-      - NULL Pointer Dereferences (`CWE-476` unchecked `malloc`)
-      - Use-After-Free (`CWE-416`)
-      - Double Free (`CWE-415`)
-      - Insecure Functions (`gets`, unbounded `strcpy`, `sprintf`)
-      - Array Out-of-Bounds & Off-by-one errors in loop guards (`CWE-193`)
-      - Uninitialized Variable Reads (`CWE-457`)
-      - Loop Invariant recalculations (e.g. `strlen()` in loop termination condition)
-      - Bitwise optimizations for parity checks (`% 2` vs `& 1`)
-    - Dynamic Heap Allocation Lifecycle Table: tracks every `malloc`/`calloc` pointer, null guard status, and free invocation.
-    - Function Complexity breakdown table.
-    - One-click "Apply Fix" and "Copy Fix" buttons.
+<br/>
 
-### 2. Export Capabilities
-- Export full AST Tree to formatted JSON.
-- Export full Static Analysis Report to Markdown or documentation.
+> A fully **client-side**, zero-backend web application that parses C source code, constructs a live **Abstract Syntax Tree (AST)**, runs **static analysis** for memory safety & complexity metrics, and renders everything as an interactive visual dashboard — all inside your browser.
+
+<br/>
 
 ---
 
-## 🚀 Running Locally
+</div>
+
+## ✨ Features at a Glance
+
+| Feature | Description |
+|---|---|
+| 🌳 **Live AST Explorer** | Interactive collapsible node tree with color-coded cards and SVG flow lines |
+| 🔍 **Static Analyzer** | Detects memory leaks, null-deref, use-after-free, buffer overflows & more |
+| 📊 **Code Health Dashboard** | Live score (0–100), letter grade, cyclomatic complexity, SEI Maintainability Index |
+| 🎨 **Syntax-Aware Editor** | Line gutter, per-line warning badges, bidirectional AST↔Editor highlighting |
+| 📤 **Export** | AST as JSON, full analysis report as Markdown |
+| 🌙 **Dark Mode** | Obsidian dark theme throughout, no light mode flash |
+| ⚡ **Zero Backend** | Runs 100% in the browser — no server, no compiler needed |
+
+---
+
+## 🖥️ Preview
+
+```
+┌─────────────────────────────┬──────────────────────────────────┐
+│  C Code Editor              │  Visual AST Tree                 │
+│  ─────────────────          │  ─────────────────               │
+│  Line gutter with           │  ┌─ FunctionDecl [blue]          │
+│  ⚠ warning badges           │  │  ┌─ ForStatement [purple]     │
+│                             │  │  │  └─ IfStatement [green]    │
+│  int main() {               │  │     └─ CallExpr [slate]       │
+│    int *p = malloc(...);    │  │                               │
+│    for (int i = 0; ...) {   │  Code Health Dashboard           │
+│      if (p[i] == 0) {       │  ──────────────────────          │
+│    ...                      │  Score: 72/100  Grade: C         │
+│                             │  ⚠ Memory Leak — CWE-401        │
+│  [Presets ▾] [Export]       │  🔴 Null Deref — CWE-476        │
+└─────────────────────────────┴──────────────────────────────────┘
+```
+
+---
+
+## 🎨 AST Node Color Coding
+
+| Color | Node Type | Example |
+|---|---|---|
+| 🔵 **Blue** | Function declarations | `int main()`, `void process()` |
+| 🟣 **Purple** | Loop statements | `for`, `while`, `do-while` |
+| 🟢 **Green** | Variables & declarations | `int x`, `char *buf` |
+| 🟡 **Amber** | Warning-level issues | Memory leak, loop invariant |
+| 🔴 **Red** | Critical issues | Null deref, use-after-free |
+| ⬜ **Slate** | All other nodes | Expressions, binary ops |
+
+---
+
+## 🔬 Static Analysis — What It Detects
+
+- **CWE-401** · Memory Leak — `malloc`/`calloc` without matching `free`
+- **CWE-476** · NULL Pointer Dereference — unchecked `malloc` return
+- **CWE-416** · Use-After-Free — pointer access after `free`
+- **CWE-415** · Double Free — `free` called twice on same pointer
+- **CWE-193** · Off-by-One — `<=` vs `<` in array loop guards
+- **CWE-457** · Uninitialized Variable Read
+- **CWE-242** · Insecure Functions — `gets`, unbounded `strcpy`, `sprintf`
+- **PERF-001** · Loop Invariant — `strlen()` in loop termination condition
+- **PERF-002** · Bitwise Optimization — `% 2` vs `& 1` parity check
+- **Cyclomatic Complexity** — V(G) per function
+- **SEI Maintainability Index** — composite quality score
+
+---
+
+## 🚀 Getting Started
+
+### Prerequisites
+- [Node.js](https://nodejs.org/) v18 or higher
+- npm v9+
+
+### Run Locally
 
 ```bash
-# Navigate to project
+# 1. Clone the repository
+git clone https://github.com/tejusgupta00-bit/c-insight.git
 cd c-insight
 
-# Install dependencies
+# 2. Install dependencies
 npm install
 
-# Start Vite dev server (also serves the Compile & Run API)
+# 3. Start the development server
 npm run dev
 
-# Open in browser:
-http://localhost:5173/
+# 4. Open in your browser
+#    http://localhost:5173/
 ```
 
-### Desktop App (Electron)
-
-C-Insight ships as a native desktop application powered by Electron. The compile-and-run service runs in the Electron main process (no separate dev server required).
+### Build for Production
 
 ```bash
-# Development: Vite HMR + Electron window
-npm run electron:dev
-
-# Production build + native installer (macOS .dmg/.zip, Windows .exe, Linux .AppImage)
-npm run electron:build
-
-# Build the renderer and launch Electron against the built bundle
-npm run electron:preview
+npm run build        # outputs to /dist
+npm run preview      # preview the production build locally
 ```
 
-### Compile & Run
+---
 
-C-Insight can now compile the buffer with **Apple Clang** (`-std=c99 -Wall -Wextra -O0`) and execute the resulting binary in an ephemeral, sandboxed temporary directory (macOS `sandbox-exec`, no network access, 2 s runtime limit, 64 KB output cap).
+## 🗂️ Project Structure
 
-- Click the green **Run** button in the editor toolbar (or press `⌘/Ctrl + Enter`).
-- Compiler diagnostics (errors / warnings) are parsed from Clang output and mapped onto the exact source lines in the gutter.
-- Program `stdout` / `stderr`, exit code, and elapsed time stream into the collapsible **Console** panel beneath the editor.
-- When the program blocks on `scanf`/`getchar`/`fgets`, type the input into the **interactive input line** that appears inline in the output and press Enter — no separate stdin panel needed.
-- Output is forced unbuffered (`stdbuf -o0 -e0`), so `printf` prompts appear in real time even without `fflush`.
-- A non-terminating program is killed at the runtime limit and reported as a timeout.
-
-The compile service is exposed at `POST /api/compile-run` by the Vite dev server (`vite.config.ts` middleware) and is exercised by the test suite:
-
-```bash
-npm test
+```
+c-insight/
+├── src/
+│   ├── components/
+│   │   ├── Header.tsx           # Top navigation bar
+│   │   ├── EditorPanel.tsx      # C code editor with gutter
+│   │   ├── VisualTree.tsx       # Recursive AST node tree
+│   │   ├── ASTVisualizer.tsx    # Pan/zoom graph view
+│   │   ├── CodeHealthDashboard.tsx  # Score + diagnostics
+│   │   └── ExportModal.tsx      # JSON / Markdown export
+│   ├── parser/
+│   │   ├── lexer.ts             # Full C tokenizer
+│   │   └── cParser.ts           # Recursive descent C→AST parser
+│   ├── analyzer/
+│   │   └── engine.ts            # Static analysis engine
+│   ├── data/
+│   │   └── presets.ts           # Built-in C code presets
+│   ├── types/
+│   │   ├── ast.ts               # ASTNode type definitions
+│   │   └── analysis.ts          # Analysis result types
+│   ├── App.tsx                  # Root layout & state
+│   ├── main.tsx                 # React entry point
+│   └── index.css                # Global styles & scrollbars
+├── index.html
+├── vite.config.ts
+├── tailwind.config.js
+├── tsconfig.json
+└── package.json
 ```
 
-> Compile & Run currently requires **macOS with Apple Clang** (`/usr/bin/clang`) and `sandbox-exec`. On other platforms the endpoint returns a clear "unsupported platform" error.
+---
+
+## 🧪 Tech Stack
+
+| Layer | Technology |
+|---|---|
+| UI Framework | React 18 + TypeScript |
+| Build Tool | Vite 5 |
+| Styling | Tailwind CSS 3 |
+| Icons | Lucide React |
+| Parser | Custom hand-rolled recursive descent (no ANTLR/tree-sitter) |
+| Analyzer | Pure TypeScript — runs fully in-browser |
+| CI | GitHub Actions |
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please:
+
+1. Fork the repo
+2. Create a feature branch: `git checkout -b feat/your-feature`
+3. Commit your changes: `git commit -m 'feat: add your feature'`
+4. Push to the branch: `git push origin feat/your-feature`
+5. Open a Pull Request
+
+---
+
+## 📄 License
+
+This project is licensed under the **MIT License** — see the [LICENSE](LICENSE) file for details.
+
+---
+
+<div align="center">
+
+Made with ❤️ by [tejusgupta00-bit](https://github.com/tejusgupta00-bit)
+
+⭐ **Star this repo if you found it useful!**
+
+</div>
